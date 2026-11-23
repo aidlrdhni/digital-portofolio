@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rifqi Aidil Ridhani — Desainer UI/UX &amp; Front-End Developer</title>
+
+  <!-- Google Fonts: Space Grotesk (Display Headings), Plus Jakarta Sans (Body), JetBrains Mono (Badges, Percentages & Tags) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#F9F9F9',
+            ink: '#141414',
+            mint: '#C7F9CC',
+            butter: '#FFF3B0',
+            lavender: '#E2CFEA',
+            peach: '#FFD6BA',
+            sky: '#BDE0FE',
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ==========================================================================
+       CORE DESIGN TOKENS & SOFT NEO-BRUTALIST SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-canvas: #F9F9F9;
+      --ink: #141414;
+      --mint: #C7F9CC;
+      --butter: #FFF3B0;
+      --lavender: #E2CFEA;
+      --peach: #FFD6BA;
+      --sky: #BDE0FE;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      /* Subtle CSS dot-grid pattern on #F9F9F9 */
+      background-image: radial-gradient(#D4D4D4 1.25px, transparent 1.25px);
+      background-size: 24px 24px;
+    }
+
+    ::selection {
+      background-color: var(--butter);
+      color: var(--ink);
+    }
+
+    /* Crisp Neo-Brutalist Surfaces & Tactile Hard Offset Shadows */
+    .nb-card {
+      background-color: #FFFFFF;
+      border: 2px solid var(--ink);
+      box-shadow: 4px 4px 0px var(--ink);
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nb-card-hover:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--ink);
+    }
+
+    .nb-btn {
+      border: 2px solid var(--ink);
+      box-shadow: 4px 4px 0px var(--ink);
+      transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.16s ease;
+    }
+
+    .nb-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--ink);
+    }
+
+    .nb-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px var(--ink);
+    }
+
+    .nb-btn-sm {
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0px var(--ink);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    }
+
+    .nb-btn-sm:hover {
+      transform: translate(-1.5px, -1.5px);
+      box-shadow: 4.5px 4.5px 0px var(--ink);
+    }
+
+    .nb-btn-sm:active {
+      transform: translate(1.5px, 1.5px);
+      box-shadow: 1px 1px 0px var(--ink);
+    }
+
+    /* Subtle Geometric Animations */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(4deg); }
+    }
+
+    @keyframes floatReverse {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(5px) rotate(-5deg); }
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -24; }
+    }
+
+    .animate-float-slow {
+      animation: floatSlow 5.5s ease-in-out infinite;
+    }
+
+    .animate-float-reverse {
+      animation: floatReverse 6.5s ease-in-out infinite;
+    }
+
+    .animate-spin-slow {
+      animation: spinSlow 28s linear infinite;
+    }
+
+    .svg-dash-flow {
+      stroke-dasharray: 6 6;
+      animation: dashFlow 1.8s linear infinite;
+    }
+
+    /* Project card subtle hover trigger for internal SVG elements */
+    .project-card:hover .project-svg-float {
+      transform: translateY(-4px) scale(1.02);
+    }
+    .project-svg-float {
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F9F9F9;
+      border-left: 2px solid #141414;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E2CFEA;
+      border: 2px solid #141414;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FFF3B0;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-butter selection:text-ink">
+
+  <!-- ========================================================================
+       FLOATING TOAST NOTIFICATION (Replaces alert() for Clipboard & Feedback)
+       ======================================================================== -->
+  <div
+    id="toast-notification"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-6 right-6 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-300"
+  >
+    <div class="bg-mint border-2 border-ink shadow-[4px_4px_0px_#141414] rounded-xl px-4 py-3 flex items-center gap-3">
+      <span class="w-6 h-6 rounded-full bg-white border-2 border-ink flex items-center justify-center shrink-0">
+        <!-- Inline SVG Checkmark -->
+        <svg class="w-3.5 h-3.5 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </span>
+      <div>
+        <p id="toast-title" class="font-display font-bold text-sm text-ink leading-tight">Email aidlrdhni06@gmail.com berhasil disalin!</p>
+        <p id="toast-subtitle" class="font-mono text-xs text-ink/80">Siap untuk kolaborasi &amp; diskusi</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       STICKY NAVIGATION BAR
+       ======================================================================== -->
+  <header class="sticky top-0 z-40 bg-canvas/95 backdrop-blur-sm border-b-2 border-ink">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[72px] flex items-center justify-between gap-4">
+
+      <!-- Left: Minimal 36x36px Profile Avatar (/images/profile.jpg + Geometric SVG Fallback) + Brand Name -->
+      <a href="#top" class="group flex items-center gap-3 focus:outline-none">
+        <div class="relative w-9 h-9 rounded-lg border-2 border-ink bg-butter shadow-[2px_2px_0px_#141414] overflow-hidden shrink-0 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 group-hover:shadow-[3px_3px_0px_#141414] transition-all">
+          <!-- Foto Profil Pemilik: Simpan foto di folder public/images/profile.jpg -->
+          <img
+            src="images/navpro.jpg"
+            alt="Rifqi Aidil Ridhani"
+            class="w-full h-full object-cover relative z-10"
+            onload="this.style.display='block'; this.nextElementSibling.style.display='none';"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- Fallback Avatar Geometris SVG Otomatis saat /images/profile.jpg belum dipasang -->
+          <div class="avatar-fallback w-full h-full flex items-center justify-center bg-sky relative">
+            <svg viewBox="0 0 36 36" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="36" height="36" fill="#BDE0FE" />
+              <rect x="18" y="0" width="18" height="18" fill="#FFF3B0" />
+              <circle cx="18" cy="14" r="5.5" fill="#FFD6BA" stroke="#141414" stroke-width="2" />
+              <path d="M8 34C8 27.9249 12.4772 23 18 23C23.5228 23 28 27.9249 28 34" fill="#C7F9CC" stroke="#141414" stroke-width="2" />
+              <path d="M29 6L30 8.5L32.5 9.5L30 10.5L29 13L28 10.5L25.5 9.5L28 8.5L29 6Z" fill="#141414" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="font-display font-bold text-base sm:text-lg tracking-tight text-ink leading-none">
+            Rifqi Aidil.
+          </span>
+          <span class="font-mono text-[11px] font-bold bg-mint border-2 border-ink px-2 py-0.5 rounded-md shadow-[2px_2px_0px_#141414] text-ink">
+            PPLG '26
+          </span>
+        </div>
+      </a>
+
+      <!-- Center/Right Desktop Navigation Links -->
+      <nav aria-label="Navigasi Utama" class="hidden md:flex items-center gap-1 lg:gap-2">
+        <a href="#work" class="px-3.5 py-2 rounded-lg font-medium text-sm text-ink hover:bg-butter/70 border-2 border-transparent hover:border-ink transition-all">
+          Karya
+        </a>
+        <a href="#tools-skills" class="px-3.5 py-2 rounded-lg font-medium text-sm text-ink hover:bg-lavender/60 border-2 border-transparent hover:border-ink transition-all">
+          Tools &amp; Skill
+        </a>
+        <a href="#about" class="px-3.5 py-2 rounded-lg font-medium text-sm text-ink hover:bg-sky/60 border-2 border-transparent hover:border-ink transition-all">
+          Tentang
+        </a>
+        <a href="#capabilities" class="px-3.5 py-2 rounded-lg font-medium text-sm text-ink hover:bg-peach/60 border-2 border-transparent hover:border-ink transition-all">
+          Kemampuan
+        </a>
+      </nav>
+
+      <!-- Right Action: Tactile Kontak Button + Mobile Menu Trigger -->
+      <div class="flex items-center gap-2.5">
+        <a
+          href="#contact"
+          class="nb-btn-sm bg-butter hover:bg-mint text-ink font-display font-bold text-xs sm:text-sm px-3.5 sm:px-4 py-2 rounded-xl inline-flex items-center gap-2"
+        >
+          <span>Kontak</span>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          aria-label="Buka Menu Navigasi"
+          aria-expanded="false"
+          class="md:hidden nb-btn-sm bg-white p-2 rounded-xl text-ink"
+        >
+          <svg id="menu-icon-open" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="17" x2="20" y2="17"></line>
+          </svg>
+          <svg id="menu-icon-close" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="6" y1="18" x2="18" y2="6"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t-2 border-ink bg-canvas px-4 py-4">
+      <nav class="flex flex-col gap-2">
+        <a href="#work" class="mobile-nav-link px-4 py-2.5 rounded-xl bg-white border-2 border-ink font-display font-bold text-sm flex items-center justify-between">
+          <span>Karya</span>
+          <span class="font-mono text-xs bg-butter px-2 py-0.5 rounded border border-ink">01</span>
+        </a>
+        <a href="#tools-skills" class="mobile-nav-link px-4 py-2.5 rounded-xl bg-white border-2 border-ink font-display font-bold text-sm flex items-center justify-between">
+          <span>Tools &amp; Skill</span>
+          <span class="font-mono text-xs bg-lavender px-2 py-0.5 rounded border border-ink">02</span>
+        </a>
+        <a href="#about" class="mobile-nav-link px-4 py-2.5 rounded-xl bg-white border-2 border-ink font-display font-bold text-sm flex items-center justify-between">
+          <span>Tentang</span>
+          <span class="font-mono text-xs bg-sky px-2 py-0.5 rounded border border-ink">03</span>
+        </a>
+        <a href="#capabilities" class="mobile-nav-link px-4 py-2.5 rounded-xl bg-white border-2 border-ink font-display font-bold text-sm flex items-center justify-between">
+          <span>Kemampuan</span>
+          <span class="font-mono text-xs bg-peach px-2 py-0.5 rounded border border-ink">04</span>
+        </a>
+        <a href="#contact" class="mobile-nav-link px-4 py-2.5 rounded-xl bg-mint border-2 border-ink font-display font-bold text-sm flex items-center justify-between">
+          <span>Kontak</span>
+          <span class="font-mono text-xs bg-white px-2 py-0.5 rounded border border-ink">05</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="relative">
+    <!-- Decorative Architectural Corner Crosshairs -->
+    <div class="pointer-events-none max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <svg class="hidden lg:block absolute top-6 left-2 w-5 h-5 text-ink/40" viewBox="0 0 20 20" fill="none">
+        <path d="M10 0V20M0 10H20" stroke="currentColor" stroke-width="1.5" />
+      </svg>
+      <svg class="hidden lg:block absolute top-6 right-2 w-5 h-5 text-ink/40" viewBox="0 0 20 20" fill="none">
+        <path d="M10 0V20M0 10H20" stroke="currentColor" stroke-width="1.5" />
+      </svg>
+    </div>
+
+    <!-- ======================================================================
+         HERO SECTION: ASYMMETRIC TWO-COLUMN LAYOUT
+         ====================================================================== -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 sm:pt-16 sm:pb-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+
+        <!-- Left Column: Hero Badge, Headline, Indonesian Bio & CTAs -->
+        <div class="lg:col-span-7 flex flex-col items-start">
+          <!-- Hero Badge (2px border & pastel yellow #FFF3B0 fill) -->
+          <div class="inline-flex items-center gap-2.5 bg-butter border-2 border-ink rounded-full px-4 py-1.5 shadow-[3px_3px_0px_#141414] mb-6">
+            <span class="w-2.5 h-2.5 rounded-full bg-mint border border-ink"></span>
+            <span class="font-mono text-xs sm:text-[13px] font-bold tracking-tight text-ink">
+              Desainer UI/UX &bull; Front-End Developer
+            </span>
+          </div>
+
+          <!-- Hero Headline (Large Bold Space Grotesk) -->
+          <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-[3.45rem] text-ink leading-[1.08] tracking-tight mb-6">
+            Learning,
+            <span class="relative inline-block mx-1">
+              <!-- Offset Mint Pastel Block -->
+              <span aria-hidden="true" class="absolute inset-0 bg-mint border-2 border-ink rounded-xl -rotate-2 translate-y-0.5 shadow-[3px_3px_0px_#141414]"></span>
+              <span class="relative z-10 px-3 py-0.5 inline-block">building,</span>
+              <!-- Decorative 4-Point Sparkle SVG -->
+              <svg class="w-6 h-6 absolute -top-3.5 -right-3 z-20 animate-float-slow" viewBox="0 0 24 24" fill="none">
+                <path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z" fill="#FFD6BA" stroke="#141414" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+            </span>
+            and exploring the
+            <span class="relative inline-block mt-1 sm:mt-2">
+              <!-- Soft Lavender Highlight Bar -->
+              <span aria-hidden="true" class="absolute inset-x-0 bottom-1 h-4 sm:h-5 bg-lavender border-2 border-ink rounded-md -z-0"></span>
+              <span class="relative z-10 px-1.5">digital experience.</span>
+            </span>
+          </h1>
+
+          <!-- Hero Description (Indonesian) -->
+          <p class="text-base sm:text-lg text-ink/85 max-w-xl leading-relaxed mb-8 font-normal">
+            Halo! Saya <strong class="font-bold text-ink">Rifqi Aidil Ridhani</strong>, pelajar jurusan <strong class="font-semibold text-ink">PPLG</strong> di <strong class="font-semibold text-ink">SMKN 2 Banjarmasin</strong> yang sedang bertumbuh di dunia pemrograman dan desain antarmuka. Senang belajar dari dasar, bereksperimen dengan kode, IoT, dan merancang pengalaman digital yang rapi.
+          </p>
+
+          <!-- Primary & Secondary CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto">
+            <a
+              href="#work"
+              class="nb-btn bg-mint hover:bg-butter text-ink font-display font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl inline-flex items-center justify-center gap-2.5 w-full sm:w-auto"
+            >
+              <span>Lihat Karya</span>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </a>
+
+            <a
+              href="#contact"
+              class="nb-btn bg-white hover:bg-sky/50 text-ink font-display font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl inline-flex items-center justify-center gap-2 w-full sm:w-auto"
+            >
+              <span>Hubungi Saya</span>
+            </a>
+          </div>
+
+          <!-- Compact Student Journey Metadata Strip -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-6 border-t-2 border-dashed border-ink/25 w-full max-w-lg">
+            <div>
+              <p class="font-display font-bold text-lg sm:text-2xl text-ink">PPLG</p>
+              <p class="font-mono text-[11px] sm:text-xs text-ink/70 mt-0.5">SMKN 2 Banjarmasin</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-lg sm:text-2xl text-ink">04+</p>
+              <p class="font-mono text-[11px] sm:text-xs text-ink/70 mt-0.5">Proyek Eksplorasi</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-lg sm:text-2xl text-ink">40–60%</p>
+              <p class="font-mono text-[11px] sm:text-xs text-ink/70 mt-0.5">Tahap Belajar Aktif</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Layered Hero Profile Frame (/images/profile.jpg) + Geometric Composition -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-[340px] sm:max-w-[380px] pt-4 pb-6 px-4">
+
+            <!-- Back Layer 1: Outlined Concentric Orbit Circle (Top-Right) -->
+            <svg
+              aria-hidden="true"
+              class="w-36 h-36 absolute -top-4 -right-2 text-ink pointer-events-none animate-spin-slow"
+              viewBox="0 0 140 140"
+              fill="none"
+            >
+              <circle cx="70" cy="70" r="62" stroke="#141414" stroke-width="1.75" stroke-dasharray="6 6" />
+              <circle cx="70" cy="70" r="46" stroke="#141414" stroke-width="1.5" />
+              <circle cx="70" cy="8" r="5" fill="#FFF3B0" stroke="#141414" stroke-width="2" />
+            </svg>
+
+            <!-- Back Layer 2: Offset Pastel Card (#E2CFEA Soft Lavender) -->
+            <div
+              aria-hidden="true"
+              class="absolute inset-x-7 top-7 bottom-3 bg-lavender border-2 border-ink rounded-2xl translate-x-3.5 translate-y-3.5 shadow-[4px_4px_0px_#141414]"
+            ></div>
+
+            <!-- Back Layer 3: Secondary Offset Pastel Block (#FFF3B0 Butter Yellow) -->
+            <div
+              aria-hidden="true"
+              class="absolute -left-1 top-14 w-20 h-28 bg-butter border-2 border-ink rounded-2xl -rotate-6 shadow-[3px_3px_0px_#141414]"
+            ></div>
+
+            <!-- Floating Top-Left Geometric Badge -->
+            <div class="absolute top-1 left-2 z-30 bg-butter border-2 border-ink rounded-lg px-2.5 py-1 shadow-[3px_3px_0px_#141414] -rotate-3">
+              <span class="font-mono text-[11px] font-bold tracking-wider text-ink">10.06.2010</span>
+            </div>
+
+            <!-- Floating Right 4-Point Star Accent -->
+            <svg
+              aria-hidden="true"
+              class="w-9 h-9 absolute top-1/2 -right-2 z-30 animate-float-reverse"
+              viewBox="0 0 36 36"
+              fill="none"
+            >
+              <path d="M18 2L22.2 13.8L34 18L22.2 22.2L18 34L13.8 22.2L2 18L13.8 13.8L18 2Z" fill="#FFF3B0" stroke="#141414" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+
+            <!-- Main Hero Portrait Frame -->
+            <div class="relative z-20 aspect-[4/4.4] w-full rounded-2xl border-2 border-ink bg-white shadow-[6px_6px_0px_#141414] overflow-hidden">
+              <!-- Top Window Header Bar -->
+              <div class="h-8 bg-canvas border-b-2 border-ink px-3 flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-peach border border-ink"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-butter border border-ink"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-mint border border-ink"></span>
+                </div>
+                <span class="font-mono text-[10px] font-semibold text-ink/70">/images/profile.jpg</span>
+              </div>
+
+              <!-- Image + Seamless Geometric SVG Fallback Container -->
+              <div class="relative w-full h-[calc(100%-2rem)] bg-canvas">
+                <!-- Foto Profil Utama: Ganti file di public/images/profile.jpg untuk memperbarui otomatis -->
+                <img
+                  src="images/Profile.jpg"
+                  alt="Foto Profil Rifqi Aidil Ridhani"
+                  class="w-full h-full object-cover relative z-10"
+                  onload="this.style.display='block'; this.nextElementSibling.style.display='none';"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+
+                <!-- Ilustrasi Portrait Geometris SVG (Otomatis tampil jika /images/profile.jpg belum tersedia) -->
+                <div class="avatar-fallback w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-canvas">
+                  <svg viewBox="0 0 320 340" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi Geometris Rifqi Aidil Ridhani">
+                    <!-- Architectural Grid Lines -->
+                    <line x1="0" y1="85" x2="320" y2="85" stroke="#141414" stroke-opacity="0.08" stroke-width="1" />
+                    <line x1="0" y1="170" x2="320" y2="170" stroke="#141414" stroke-opacity="0.08" stroke-width="1" />
+                    <line x1="0" y1="255" x2="320" y2="255" stroke="#141414" stroke-opacity="0.08" stroke-width="1" />
+                    <line x1="80" y1="0" x2="80" y2="340" stroke="#141414" stroke-opacity="0.08" stroke-width="1" />
+                    <line x1="160" y1="0" x2="160" y2="340" stroke="#141414" stroke-opacity="0.08" stroke-width="1" />
+                    <line x1="240" y1="0" x2="240" y2="340" stroke="#141414" stroke-opacity="0.08" stroke-width="1" />
+
+                    <!-- Layered Pastel Geometric Backdrop Shapes -->
+                    <rect x="34" y="34" width="130" height="130" rx="20" fill="#BDE0FE" stroke="#141414" stroke-width="2.2" />
+                    <circle cx="232" cy="108" r="54" fill="#FFF3B0" stroke="#141414" stroke-width="2.2" />
+                    <rect x="195" y="162" width="88" height="88" rx="44" fill="#E2CFEA" stroke="#141414" stroke-width="2.2" />
+
+                    <!-- Orbiting Dashed Ring -->
+                    <ellipse cx="160" cy="168" rx="116" ry="44" transform="rotate(-14 160 168)" stroke="#141414" stroke-width="2" stroke-dasharray="6 6" />
+
+                    <!-- Stylized Geometric Shoulders / Hoodie -->
+                    <path d="M66 340C66 277.039 108.085 226 160 226C211.915 226 254 277.039 254 340H66Z" fill="#C7F9CC" stroke="#141414" stroke-width="2.5" />
+                    <path d="M132 228L160 268L188 228" fill="#FFFFFF" stroke="#141414" stroke-width="2.2" stroke-linejoin="round" />
+                    <circle cx="160" cy="288" r="4" fill="#141414" />
+                    <circle cx="160" cy="306" r="4" fill="#141414" />
+
+                    <!-- Geometric Head & Hair -->
+                    <rect x="114" y="96" width="92" height="106" rx="46" fill="#FFD6BA" stroke="#141414" stroke-width="2.5" />
+                    <path d="M114 138C114 112.595 134.595 92 160 92C185.405 92 206 112.595 206 138H114Z" fill="#141414" />
+                    <rect x="148" y="84" width="58" height="16" rx="8" fill="#FFF3B0" stroke="#141414" stroke-width="2.2" />
+
+                    <!-- Minimal Glasses & Eyes -->
+                    <rect x="128" y="144" width="26" height="18" rx="5" fill="#FFFFFF" stroke="#141414" stroke-width="2.2" />
+                    <rect x="166" y="144" width="26" height="18" rx="5" fill="#FFFFFF" stroke="#141414" stroke-width="2.2" />
+                    <line x1="154" y1="152" x2="166" y2="152" stroke="#141414" stroke-width="2.2" />
+                    <circle cx="141" cy="153" r="3" fill="#141414" />
+                    <circle cx="179" cy="153" r="3" fill="#141414" />
+
+                    <!-- Friendly Smile Arc -->
+                    <path d="M150 176C153 180 167 180 170 176" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
+
+                    <!-- Floating Sparkle Stars -->
+                    <path d="M56 204L59.5 213.5L69 217L59.5 220.5L56 230L52.5 220.5L43 217L52.5 213.5L56 204Z" fill="#FFF3B0" stroke="#141414" stroke-width="2" stroke-linejoin="round" />
+                    <path d="M266 48L268.5 54.5L275 57L268.5 59.5L266 66L263.5 59.5L257 57L263.5 54.5L266 48Z" fill="#C7F9CC" stroke="#141414" stroke-width="1.8" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Bottom Status Badge (#C7F9CC Pastel Mint) -->
+            <div class="absolute bottom-1 left-0 sm:-left-2 z-30 bg-mint border-2 border-ink rounded-full px-4 py-2 shadow-[4px_4px_0px_#141414] flex items-center gap-2">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ink opacity-40"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-ink"></span>
+              </span>
+              <span class="font-display font-bold text-xs sm:text-sm text-ink">SMKN 2 Banjarmasin &bull; PPLG</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Subtle Geometric Divider Band -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="border-t-2 border-ink/15 relative flex items-center justify-between py-2">
+        <span class="font-mono text-[11px] text-ink/55">PORTOFOLIO BELAJAR &bull; RIFQI AIDIL RIDHANI</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 bg-butter border border-ink inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-lavender border border-ink inline-block"></span>
+          <span class="w-2.5 h-2.5 bg-mint border border-ink inline-block"></span>
+        </div>
+        <span class="font-mono text-[11px] text-ink/55 hidden sm:inline">ILUSTRASI SVG BERBASIS KODE</span>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SELECTED WORK SECTION (KARYA PILIHAN)
+         ====================================================================== -->
+    <section id="work" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <!-- Section Header + Category Filter Buttons -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <div class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider bg-butter border-2 border-ink px-3 py-1 rounded-lg shadow-[2px_2px_0px_#141414] mb-3">
+            <span>01 / Karya Pilihan</span>
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ink tracking-tight">
+            Proyek &amp; eksplorasi yang pernah dikerjakan.
+          </h2>
+          <p class="text-sm sm:text-base text-ink/75 mt-2 max-w-xl">
+            Setiap pratinjau di bawah dibuat menggunakan ilustrasi SVG berbasis kode yang menggambarkan konsep dan cara kerja proyek secara jujur.
+          </p>
+        </div>
+
+        <!-- Interactive Category Filter Buttons -->
+        <div id="project-filters" class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter proyek berdasarkan kategori">
+          <button
+            type="button"
+            data-filter="all"
+            class="filter-btn nb-btn-sm bg-ink text-white font-display font-bold text-xs sm:text-sm px-4 py-2 rounded-full cursor-pointer"
+          >
+            Semua
+          </button>
+          <button
+            type="button"
+            data-filter="IoT & Web"
+            class="filter-btn nb-btn-sm bg-white hover:bg-mint text-ink font-display font-bold text-xs sm:text-sm px-4 py-2 rounded-full cursor-pointer"
+          >
+            IoT &amp; Web
+          </button>
+          <button
+            type="button"
+            data-filter="UI/UX Design"
+            class="filter-btn nb-btn-sm bg-white hover:bg-lavender text-ink font-display font-bold text-xs sm:text-sm px-4 py-2 rounded-full cursor-pointer"
+          >
+            UI/UX Design
+          </button>
+          <button
+            type="button"
+            data-filter="3D Modeling"
+            class="filter-btn nb-btn-sm bg-white hover:bg-peach text-ink font-display font-bold text-xs sm:text-sm px-4 py-2 rounded-full cursor-pointer"
+          >
+            3D Modeling
+          </button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- ==================================================================
+             PROJECT 1: JAM DIGITAL IOT PANEL LED P10 (IoT & Web - Pastel Mint Header)
+             ================================================================== -->
+        <article
+          data-category="IoT & Web"
+          class="project-card nb-card nb-card-hover rounded-2xl overflow-hidden flex flex-col justify-between"
+        >
+          <div>
+            <!-- Pastel Mint Visual Header with Custom P10 LED Dot-Matrix SVG -->
+            <div class="relative h-60 sm:h-64 bg-mint/45 border-b-2 border-ink p-4 overflow-hidden flex items-center justify-center">
+              <span class="absolute top-3 left-3 z-10 font-mono text-[10px] font-bold bg-white border border-ink px-2.5 py-0.5 rounded">
+                HARDWARE // PANEL P10
+              </span>
+              <span class="absolute top-3 right-3 z-10 font-mono text-[10px] font-bold bg-mint border border-ink px-2 py-0.5 rounded">
+                IoT &amp; Web
+              </span>
+
+              <!-- Custom SVG: P10 LED Dot-Matrix Clock Display (10:06) + Wiring Pins + Wi-Fi Waves -->
+              <svg viewBox="0 0 420 220" class="w-full h-full project-svg-float" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi Jam Digital IoT dengan Panel LED Dot-Matrix P10">
+                <!-- P10 Panel Outer Frame -->
+                <rect x="34" y="42" width="276" height="118" rx="12" fill="#141414" stroke="#141414" stroke-width="2.5" />
+                <rect x="44" y="52" width="256" height="98" rx="6" fill="#1E1E1E" stroke="#333333" stroke-width="1.5" />
+
+                <!-- Corner Mounting Screws -->
+                <circle cx="40" cy="48" r="2.5" fill="#FFF3B0" />
+                <circle cx="304" cy="48" r="2.5" fill="#FFF3B0" />
+                <circle cx="40" cy="154" r="2.5" fill="#FFF3B0" />
+                <circle cx="304" cy="154" r="2.5" fill="#FFF3B0" />
+
+                <!-- LED Dot-Matrix Digits "10:06" -->
+                <!-- Digit "1" -->
+                <g fill="#C7F9CC">
+                  <circle cx="78" cy="74" r="3.5" /><circle cx="78" cy="84" r="3.5" /><circle cx="78" cy="94" r="3.5" /><circle cx="78" cy="104" r="3.5" /><circle cx="78" cy="114" r="3.5" /><circle cx="78" cy="124" r="3.5" />
+                  <circle cx="70" cy="82" r="3" />
+                </g>
+
+                <!-- Digit "0" -->
+                <g fill="#C7F9CC">
+                  <circle cx="102" cy="74" r="3.5" /><circle cx="112" cy="74" r="3.5" /><circle cx="122" cy="74" r="3.5" />
+                  <circle cx="102" cy="84" r="3.5" /><circle cx="122" cy="84" r="3.5" />
+                  <circle cx="102" cy="94" r="3.5" /><circle cx="122" cy="94" r="3.5" />
+                  <circle cx="102" cy="104" r="3.5" /><circle cx="122" cy="104" r="3.5" />
+                  <circle cx="102" cy="114" r="3.5" /><circle cx="122" cy="114" r="3.5" />
+                  <circle cx="102" cy="124" r="3.5" /><circle cx="112" cy="124" r="3.5" /><circle cx="122" cy="124" r="3.5" />
+                </g>
+
+                <!-- Colon ":" -->
+                <g fill="#FFF3B0">
+                  <circle cx="144" cy="90" r="4" />
+                  <circle cx="144" cy="110" r="4" />
+                </g>
+
+                <!-- Digit "0" -->
+                <g fill="#C7F9CC">
+                  <circle cx="166" cy="74" r="3.5" /><circle cx="176" cy="74" r="3.5" /><circle cx="186" cy="74" r="3.5" />
+                  <circle cx="166" cy="84" r="3.5" /><circle cx="186" cy="84" r="3.5" />
+                  <circle cx="166" cy="94" r="3.5" /><circle cx="186" cy="94" r="3.5" />
+                  <circle cx="166" cy="104" r="3.5" /><circle cx="186" cy="104" r="3.5" />
+                  <circle cx="166" cy="114" r="3.5" /><circle cx="186" cy="114" r="3.5" />
+                  <circle cx="166" cy="124" r="3.5" /><circle cx="176" cy="124" r="3.5" /><circle cx="186" cy="124" r="3.5" />
+                </g>
+
+                <!-- Digit "6" -->
+                <g fill="#C7F9CC">
+                  <circle cx="210" cy="74" r="3.5" /><circle cx="220" cy="74" r="3.5" /><circle cx="230" cy="74" r="3.5" />
+                  <circle cx="210" cy="84" r="3.5" />
+                  <circle cx="210" cy="94" r="3.5" /><circle cx="220" cy="94" r="3.5" /><circle cx="230" cy="94" r="3.5" />
+                  <circle cx="210" cy="104" r="3.5" /><circle cx="230" cy="104" r="3.5" />
+                  <circle cx="210" cy="114" r="3.5" /><circle cx="230" cy="114" r="3.5" />
+                  <circle cx="210" cy="124" r="3.5" /><circle cx="220" cy="124" r="3.5" /><circle cx="230" cy="124" r="3.5" />
+                </g>
+
+                <!-- Status Bar inside P10 -->
+                <text x="68" y="142" fill="#FFF3B0" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">NTP SYNC: OK &bull; P10 32x16</text>
+
+                <!-- Microcontroller Node (Right Side) + Wiring -->
+                <rect x="332" y="72" width="62" height="88" rx="10" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
+                <rect x="344" y="84" width="38" height="24" rx="4" fill="#FFF3B0" stroke="#141414" stroke-width="1.6" />
+                <text x="349" y="99" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">MCU</text>
+                <text x="344" y="124" fill="#141414" font-family="JetBrains Mono, monospace" font-size="7.5" font-weight="600">CLK / LAT</text>
+                <text x="344" y="136" fill="#141414" font-family="JetBrains Mono, monospace" font-size="7.5" font-weight="600">D12 / GND</text>
+
+                <!-- Jumper Wires Connecting MCU & P10 -->
+                <path d="M310 92H332" stroke="#141414" stroke-width="2.2" class="svg-dash-flow" />
+                <path d="M310 112H332" stroke="#141414" stroke-width="2.2" class="svg-dash-flow" />
+                <path d="M310 132H332" stroke="#141414" stroke-width="2.2" class="svg-dash-flow" />
+
+                <!-- Wi-Fi Signal Waves Above MCU -->
+                <path d="M353 56C358 51 368 51 373 56" stroke="#141414" stroke-width="2" stroke-linecap="round" />
+                <path d="M347 49C356 41 370 41 379 49" stroke="#141414" stroke-width="2" stroke-linecap="round" />
+                <circle cx="363" cy="62" r="2.5" fill="#141414" />
+
+                <!-- Bottom Wiring Pin Strip -->
+                <rect x="54" y="172" width="236" height="24" rx="6" fill="#FFFFFF" stroke="#141414" stroke-width="1.8" />
+                <text x="68" y="187" fill="#141414" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">HUB12 INTERFACE &bull; REAL-TIME CLOCK</text>
+              </svg>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs font-bold bg-mint border border-ink px-2.5 py-0.5 rounded-md">
+                  IoT &amp; Web
+                </span>
+                <span class="font-mono text-xs text-ink/65">Proyek Mikrokontroler</span>
+              </div>
+
+              <h3 class="font-display font-bold text-xl sm:text-2xl text-ink mb-2">
+                Jam Digital IoT Panel LED P10
+              </h3>
+
+              <p class="text-sm text-ink/80 leading-relaxed mb-5">
+                Jam digital berbasis mikrokontroler dengan layar LED dot-matrix P10 yang menampilkan waktu real-time secara jelas dan stabil.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="px-6 pb-6 pt-0 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">Arduino IDE</span>
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">Panel P10</span>
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">IoT</span>
+            </div>
+
+            <button
+              type="button"
+              onclick="openProjectModal(0)"
+              class="nb-btn-sm bg-mint hover:bg-butter font-display font-bold text-xs px-3.5 py-2 rounded-lg inline-flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Detail Proyek</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- ==================================================================
+             PROJECT 2: WEBSITE PENGATURAN JAM IOT (IoT & Web - Pastel Sky Blue Header)
+             ================================================================== -->
+        <article
+          data-category="IoT & Web"
+          class="project-card nb-card nb-card-hover rounded-2xl overflow-hidden flex flex-col justify-between"
+        >
+          <div>
+            <!-- Pastel Sky Blue Visual Header with Custom Web Control Dashboard SVG -->
+            <div class="relative h-60 sm:h-64 bg-sky/45 border-b-2 border-ink p-4 overflow-hidden flex items-center justify-center">
+              <span class="absolute top-3 left-3 z-10 font-mono text-[10px] font-bold bg-white border border-ink px-2.5 py-0.5 rounded">
+                WEB INTERFACE // CONTROL
+              </span>
+              <span class="absolute top-3 right-3 z-10 font-mono text-[10px] font-bold bg-sky border border-ink px-2 py-0.5 rounded">
+                IoT &amp; Web
+              </span>
+
+              <!-- Custom SVG: Responsive Web Control Dashboard with Time Sync, Brightness Slider & Live Preview -->
+              <svg viewBox="0 0 420 220" class="w-full h-full project-svg-float" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi Website Pengaturan Jam Digital IoT">
+                <!-- Browser Window Frame -->
+                <rect x="30" y="28" width="360" height="168" rx="12" fill="#FFFFFF" stroke="#141414" stroke-width="2.2" />
+                <line x1="30" y1="58" x2="390" y2="58" stroke="#141414" stroke-width="1.8" />
+                <circle cx="48" cy="43" r="4" fill="#FFD6BA" stroke="#141414" stroke-width="1.5" />
+                <circle cx="62" cy="43" r="4" fill="#FFF3B0" stroke="#141414" stroke-width="1.5" />
+                <circle cx="76" cy="43" r="4" fill="#C7F9CC" stroke="#141414" stroke-width="1.5" />
+                <rect x="94" y="35" width="180" height="16" rx="4" fill="#F9F9F9" stroke="#141414" stroke-width="1.2" />
+                <text x="102" y="46" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="600">http://jam-p10.local/panel</text>
+
+                <!-- Left Card: Live Preview & Sync Time Button -->
+                <rect x="46" y="72" width="154" height="108" rx="10" fill="#F9F9F9" stroke="#141414" stroke-width="1.8" />
+                <rect x="58" y="84" width="130" height="44" rx="6" fill="#141414" />
+                <text x="86" y="112" fill="#C7F9CC" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700">10:06:45</text>
+
+                <!-- Sync Time Button -->
+                <rect x="58" y="138" width="130" height="30" rx="7" fill="#FFF3B0" stroke="#141414" stroke-width="1.8" />
+                <text x="84" y="157" fill="#141414" font-family="Space Grotesk, sans-serif" font-size="10.5" font-weight="700">Sinkron Waktu</text>
+
+                <!-- Right Card: Brightness Slider & Mode Toggles -->
+                <rect x="214" y="72" width="160" height="108" rx="10" fill="#BDE0FE" fill-opacity="0.4" stroke="#141414" stroke-width="1.8" />
+                <text x="228" y="92" fill="#141414" font-family="Space Grotesk, sans-serif" font-size="10" font-weight="700">Kecerahan Panel (80%)</text>
+                <!-- Slider Track -->
+                <rect x="228" y="102" width="132" height="10" rx="5" fill="#FFFFFF" stroke="#141414" stroke-width="1.6" />
+                <rect x="228" y="102" width="102" height="10" rx="5" fill="#C7F9CC" stroke="#141414" stroke-width="1.6" />
+                <circle cx="330" cy="107" r="7" fill="#FFF3B0" stroke="#141414" stroke-width="2" />
+
+                <!-- Mode Selector Pills -->
+                <text x="228" y="134" fill="#141414" font-family="Space Grotesk, sans-serif" font-size="10" font-weight="700">Mode Tampilan</text>
+                <rect x="228" y="142" width="60" height="24" rx="6" fill="#C7F9CC" stroke="#141414" stroke-width="1.6" />
+                <text x="242" y="157" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">Jam</text>
+
+                <rect x="296" y="142" width="64" height="24" rx="6" fill="#FFFFFF" stroke="#141414" stroke-width="1.6" />
+                <text x="307" y="157" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">Tanggal</text>
+              </svg>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs font-bold bg-sky border border-ink px-2.5 py-0.5 rounded-md">
+                  IoT &amp; Web
+                </span>
+                <span class="font-mono text-xs text-ink/65">Antarmuka Kontrol Browser</span>
+              </div>
+
+              <h3 class="font-display font-bold text-xl sm:text-2xl text-ink mb-2">
+                Website Pengaturan Jam IoT
+              </h3>
+
+              <p class="text-sm text-ink/80 leading-relaxed mb-5">
+                Antarmuka web responsif untuk mengatur waktu, kecerahan layar, serta mode tampilan jam digital P10 langsung melalui browser.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="px-6 pb-6 pt-0 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">HTML/CSS</span>
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">JavaScript</span>
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">Web Control</span>
+            </div>
+
+            <button
+              type="button"
+              onclick="openProjectModal(1)"
+              class="nb-btn-sm bg-sky hover:bg-butter font-display font-bold text-xs px-3.5 py-2 rounded-lg inline-flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Detail Proyek</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- ==================================================================
+             PROJECT 3: EKSPLORASI 3D MODEL BASIC DI BLENDER (3D Modeling - Pastel Peach Header)
+             ================================================================== -->
+        <article
+          data-category="3D Modeling"
+          class="project-card nb-card nb-card-hover rounded-2xl overflow-hidden flex flex-col justify-between"
+        >
+          <div>
+            <!-- Pastel Peach Visual Header with Custom 3D Viewport & Isometric Shapes SVG -->
+            <div class="relative h-60 sm:h-64 bg-peach/45 border-b-2 border-ink p-4 overflow-hidden flex items-center justify-center">
+              <span class="absolute top-3 left-3 z-10 font-mono text-[10px] font-bold bg-white border border-ink px-2.5 py-0.5 rounded">
+                3D VIEWPORT // MESH &amp; LIGHT
+              </span>
+              <span class="absolute top-3 right-3 z-10 font-mono text-[10px] font-bold bg-peach border border-ink px-2 py-0.5 rounded">
+                3D Modeling
+              </span>
+
+              <!-- Custom SVG: 3D Viewport Grid, X/Y/Z Axis Gizmo, Isometric Geometric Objects & Light Source Cone -->
+              <svg viewBox="0 0 420 220" class="w-full h-full project-svg-float" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi 3D Viewport dan Pemodelan Geometris Dasar di Blender">
+                <!-- Viewport Container -->
+                <rect x="28" y="28" width="364" height="168" rx="14" fill="#FFFFFF" stroke="#141414" stroke-width="2.2" />
+
+                <!-- Perspective Floor Grid Lines -->
+                <line x1="60" y1="164" x2="360" y2="164" stroke="#141414" stroke-opacity="0.22" stroke-width="1.2" />
+                <line x1="85" y1="144" x2="335" y2="144" stroke="#141414" stroke-opacity="0.18" stroke-width="1.2" />
+                <line x1="110" y1="126" x2="310" y2="126" stroke="#141414" stroke-opacity="0.14" stroke-width="1.2" />
+                <line x1="140" y1="126" x2="90" y2="176" stroke="#141414" stroke-opacity="0.18" stroke-width="1.2" />
+                <line x1="210" y1="126" x2="210" y2="176" stroke="#141414" stroke-opacity="0.22" stroke-width="1.2" />
+                <line x1="280" y1="126" x2="330" y2="176" stroke="#141414" stroke-opacity="0.18" stroke-width="1.2" />
+
+                <!-- Light Source Cone (Top Right) -->
+                <circle cx="316" cy="58" r="10" fill="#FFF3B0" stroke="#141414" stroke-width="2" />
+                <line x1="308" y1="65" x2="238" y2="122" stroke="#141414" stroke-width="1.4" stroke-dasharray="4 4" />
+                <line x1="322" y1="67" x2="288" y2="148" stroke="#141414" stroke-width="1.4" stroke-dasharray="4 4" />
+                <text x="292" y="44" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">AREA LIGHT</text>
+
+                <!-- Isometric Cube Primitive (Center-Left) -->
+                <!-- Top Face -->
+                <polygon points="168,78 212,60 256,78 212,96" fill="#FFF3B0" stroke="#141414" stroke-width="2" stroke-linejoin="round" />
+                <!-- Left Face -->
+                <polygon points="168,78 212,96 212,146 168,128" fill="#FFD6BA" stroke="#141414" stroke-width="2" stroke-linejoin="round" />
+                <!-- Right Face -->
+                <polygon points="212,96 256,78 256,128 212,146" fill="#BDE0FE" stroke="#141414" stroke-width="2" stroke-linejoin="round" />
+
+                <!-- Secondary Sphere Primitive (Right) -->
+                <circle cx="282" cy="134" r="24" fill="#C7F9CC" stroke="#141414" stroke-width="2" />
+                <ellipse cx="282" cy="134" rx="24" ry="8" stroke="#141414" stroke-width="1.2" stroke-dasharray="3 3" />
+
+                <!-- X / Y / Z Axis Gizmo (Top Left inside Viewport) -->
+                <circle cx="64" cy="64" r="22" fill="#F9F9F9" stroke="#141414" stroke-width="1.6" />
+                <line x1="64" y1="64" x2="64" y2="47" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
+                <circle cx="64" cy="47" r="3.5" fill="#BDE0FE" stroke="#141414" stroke-width="1.4" />
+                <line x1="64" y1="64" x2="79" y2="71" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
+                <circle cx="79" cy="71" r="3.5" fill="#FFD6BA" stroke="#141414" stroke-width="1.4" />
+                <line x1="64" y1="64" x2="50" y2="72" stroke="#141414" stroke-width="2.2" stroke-linecap="round" />
+                <circle cx="50" cy="72" r="3.5" fill="#C7F9CC" stroke="#141414" stroke-width="1.4" />
+
+                <!-- Bottom Viewport Status Tag -->
+                <rect x="44" y="168" width="172" height="18" rx="4" fill="#F9F9F9" stroke="#141414" stroke-width="1.4" />
+                <text x="52" y="180" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700">Object Mode &bull; Verts: 264</text>
+              </svg>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs font-bold bg-peach border border-ink px-2.5 py-0.5 rounded-md">
+                  3D Modeling
+                </span>
+                <span class="font-mono text-xs text-ink/65">Latihan Objek &amp; Pencahayaan</span>
+              </div>
+
+              <h3 class="font-display font-bold text-xl sm:text-2xl text-ink mb-2">
+                Eksplorasi 3D Model Basic di Blender
+              </h3>
+
+              <p class="text-sm text-ink/80 leading-relaxed mb-5">
+                Latihan pemodelan objek 3D dasar, pengaturan pencahayaan sederhana, material, dan komposisi bentuk geometris menggunakan Blender.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="px-6 pb-6 pt-0 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">Blender</span>
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">3D Basic</span>
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">Modeling</span>
+            </div>
+
+            <button
+              type="button"
+              onclick="openProjectModal(2)"
+              class="nb-btn-sm bg-peach hover:bg-butter font-display font-bold text-xs px-3.5 py-2 rounded-lg inline-flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Detail Proyek</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- ==================================================================
+             PROJECT 4: EKSPLORASI DESAIN UI/UX DI FIGMA (UI/UX Design - Pastel Lavender Header)
+             ================================================================== -->
+        <article
+          data-category="UI/UX Design"
+          class="project-card nb-card nb-card-hover rounded-2xl overflow-hidden flex flex-col justify-between"
+        >
+          <div>
+            <!-- Pastel Lavender Visual Header with Custom Figma Frames & UI Cards SVG -->
+            <div class="relative h-60 sm:h-64 bg-lavender/45 border-b-2 border-ink p-4 overflow-hidden flex items-center justify-center">
+              <span class="absolute top-3 left-3 z-10 font-mono text-[10px] font-bold bg-white border border-ink px-2.5 py-0.5 rounded">
+                FIGMA CANVAS // WIREFRAME
+              </span>
+              <span class="absolute top-3 right-3 z-10 font-mono text-[10px] font-bold bg-lavender border border-ink px-2 py-0.5 rounded">
+                UI/UX Design
+              </span>
+
+              <!-- Custom SVG: Figma Frames, UI Cards, Color Swatches & Cursor Pointer -->
+              <svg viewBox="0 0 420 220" class="w-full h-full project-svg-float" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi Eksplorasi Desain UI/UX dan Wireframe di Figma">
+                <!-- Artboard 1: Wireframe Frame -->
+                <text x="42" y="44" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700"># Frame_01_Wireframe</text>
+                <rect x="42" y="50" width="124" height="142" rx="10" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
+                <rect x="54" y="62" width="100" height="16" rx="4" fill="#F9F9F9" stroke="#141414" stroke-width="1.4" />
+                <rect x="54" y="86" width="100" height="44" rx="6" fill="#E2CFEA" fill-opacity="0.55" stroke="#141414" stroke-width="1.4" stroke-dasharray="3 3" />
+                <rect x="54" y="138" width="46" height="40" rx="5" fill="#F9F9F9" stroke="#141414" stroke-width="1.4" />
+                <rect x="108" y="138" width="46" height="40" rx="5" fill="#F9F9F9" stroke="#141414" stroke-width="1.4" />
+
+                <!-- Artboard 2: Styled UI Component Frame -->
+                <text x="192" y="44" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700"># Frame_02_UI_Kit</text>
+                <rect x="192" y="50" width="136" height="142" rx="10" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
+                <!-- Selection Bounding Box Handles on Hero Card inside Figma -->
+                <rect x="204" y="64" width="112" height="54" rx="8" fill="#FFF3B0" stroke="#141414" stroke-width="1.8" />
+                <rect x="201" y="61" width="6" height="6" fill="#FFFFFF" stroke="#141414" stroke-width="1.5" />
+                <rect x="313" y="61" width="6" height="6" fill="#FFFFFF" stroke="#141414" stroke-width="1.5" />
+                <rect x="201" y="115" width="6" height="6" fill="#FFFFFF" stroke="#141414" stroke-width="1.5" />
+                <rect x="313" y="115" width="6" height="6" fill="#FFFFFF" stroke="#141414" stroke-width="1.5" />
+
+                <!-- Mini UI Card Content -->
+                <rect x="214" y="74" width="52" height="10" rx="3" fill="#141414" />
+                <rect x="214" y="90" width="82" height="8" rx="3" fill="#141414" fill-opacity="0.3" />
+
+                <!-- Bottom UI Cards -->
+                <rect x="204" y="128" width="52" height="50" rx="7" fill="#C7F9CC" stroke="#141414" stroke-width="1.6" />
+                <rect x="264" y="128" width="52" height="50" rx="7" fill="#BDE0FE" stroke="#141414" stroke-width="1.6" />
+
+                <!-- Right Color Swatch Palette Panel -->
+                <rect x="342" y="62" width="44" height="118" rx="10" fill="#FFFFFF" stroke="#141414" stroke-width="1.8" />
+                <circle cx="364" cy="82" r="10" fill="#FFF3B0" stroke="#141414" stroke-width="1.6" />
+                <circle cx="364" cy="110" r="10" fill="#C7F9CC" stroke="#141414" stroke-width="1.6" />
+                <circle cx="364" cy="138" r="10" fill="#E2CFEA" stroke="#141414" stroke-width="1.6" />
+                <circle cx="364" cy="162" r="7" fill="#141414" />
+
+                <!-- Designer Cursor Pointer -->
+                <polygon points="296,104 303,124 308,117 316,115" fill="#FFD6BA" stroke="#141414" stroke-width="1.8" stroke-linejoin="round" />
+                <rect x="310" y="122" width="42" height="16" rx="4" fill="#141414" />
+                <text x="317" y="133" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">Rifqi</text>
+              </svg>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs font-bold bg-lavender border border-ink px-2.5 py-0.5 rounded-md">
+                  UI/UX Design
+                </span>
+                <span class="font-mono text-xs text-ink/65">Wireframe &amp; Komponen</span>
+              </div>
+
+              <h3 class="font-display font-bold text-xl sm:text-2xl text-ink mb-2">
+                Eksplorasi Desain UI/UX di Figma
+              </h3>
+
+              <p class="text-sm text-ink/80 leading-relaxed mb-5">
+                Kumpulan latihan desain antarmuka aplikasi dan website, penyusunan wireframe, komponen dasar, serta tata letak modern di Figma.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="px-6 pb-6 pt-0 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">Figma</span>
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">Wireframe</span>
+              <span class="font-mono text-[11px] bg-canvas border border-ink px-2 py-0.5 rounded">UI/UX</span>
+            </div>
+
+            <button
+              type="button"
+              onclick="openProjectModal(3)"
+              class="nb-btn-sm bg-lavender hover:bg-butter font-display font-bold text-xs px-3.5 py-2 rounded-lg inline-flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Detail Proyek</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PENGUASAAN TOOLS & SOFT SKILLS SECTION
+         ====================================================================== -->
+    <section id="tools-skills" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-t-2 border-ink/15">
+      <!-- Section Header -->
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider bg-sky border-2 border-ink px-3 py-1 rounded-lg shadow-[2px_2px_0px_#141414] mb-3">
+          <span>02 / Tools &amp; Soft Skills</span>
+        </div>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ink tracking-tight">
+          Perangkat yang dipelajari &amp; kebiasaan kerja.
+        </h2>
+        <p class="text-sm sm:text-base text-ink/75 mt-2 max-w-2xl">
+          Sebagai pelajar yang masih terus bertumbuh, tingkat penguasaan tools di bawah ini mencerminkan kemampuan saya saat ini secara jujur (berada di kisaran 40% – 60%).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+        <!-- Left / Top Subsection (7 Cols): Penguasaan Tools (40% - 60%) -->
+        <div class="lg:col-span-7">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+            <h3 class="font-display font-bold text-xl text-ink">
+              Penguasaan Tools
+            </h3>
+            <span class="font-mono text-xs font-bold bg-butter border-2 border-ink px-3 py-1 rounded-full shadow-[2px_2px_0px_#141414]">
+              Penguasaan Saat Ini: 40% – 60%
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Tool 1: Canva (60%) -->
+            <div class="nb-card nb-card-hover rounded-2xl p-5 bg-white">
+              <div class="flex items-center justify-between gap-3 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-9 h-9 rounded-xl bg-sky border-2 border-ink flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                      <circle cx="9" cy="9" r="2"></circle>
+                      <path d="M21 15l-5-5L5 21"></path>
+                    </svg>
+                  </span>
+                  <span class="font-display font-bold text-base text-ink">Canva</span>
+                </div>
+                <span class="font-mono text-xs font-bold bg-sky/60 border border-ink px-2 py-0.5 rounded">60%</span>
+              </div>
+              <div class="w-full h-3 bg-canvas border-2 border-ink rounded-full overflow-hidden mb-2.5">
+                <div class="h-full bg-sky border-r-2 border-ink" style="width: 60%;"></div>
+              </div>
+              <p class="text-xs text-ink/75">Layout visual, poster, &amp; presentasi</p>
+            </div>
+
+            <!-- Tool 2: Figma (55%) -->
+            <div class="nb-card nb-card-hover rounded-2xl p-5 bg-white">
+              <div class="flex items-center justify-between gap-3 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-9 h-9 rounded-xl bg-lavender border-2 border-ink flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path>
+                      <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"></path>
+                      <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path>
+                      <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path>
+                      <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path>
+                    </svg>
+                  </span>
+                  <span class="font-display font-bold text-base text-ink">Figma</span>
+                </div>
+                <span class="font-mono text-xs font-bold bg-lavender/70 border border-ink px-2 py-0.5 rounded">55%</span>
+              </div>
+              <div class="w-full h-3 bg-canvas border-2 border-ink rounded-full overflow-hidden mb-2.5">
+                <div class="h-full bg-lavender border-r-2 border-ink" style="width: 55%;"></div>
+              </div>
+              <p class="text-xs text-ink/75">Wireframing &amp; desain antarmuka dasar</p>
+            </div>
+
+            <!-- Tool 3: VS Code (55%) -->
+            <div class="nb-card nb-card-hover rounded-2xl p-5 bg-white">
+              <div class="flex items-center justify-between gap-3 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-9 h-9 rounded-xl bg-mint border-2 border-ink flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                  </span>
+                  <span class="font-display font-bold text-base text-ink">VS Code</span>
+                </div>
+                <span class="font-mono text-xs font-bold bg-mint/70 border border-ink px-2 py-0.5 rounded">55%</span>
+              </div>
+              <div class="w-full h-3 bg-canvas border-2 border-ink rounded-full overflow-hidden mb-2.5">
+                <div class="h-full bg-mint border-r-2 border-ink" style="width: 55%;"></div>
+              </div>
+              <p class="text-xs text-ink/75">Penulisan kode HTML, CSS, JS dasar</p>
+            </div>
+
+            <!-- Tool 4: Arduino IDE (50%) -->
+            <div class="nb-card nb-card-hover rounded-2xl p-5 bg-white">
+              <div class="flex items-center justify-between gap-3 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-9 h-9 rounded-xl bg-butter border-2 border-ink flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                      <rect x="9" y="9" width="6" height="6"></rect>
+                      <line x1="9" y1="1" x2="9" y2="4"></line>
+                      <line x1="15" y1="1" x2="15" y2="4"></line>
+                      <line x1="9" y1="20" x2="9" y2="23"></line>
+                      <line x1="15" y1="20" x2="15" y2="23"></line>
+                    </svg>
+                  </span>
+                  <span class="font-display font-bold text-base text-ink">Arduino IDE</span>
+                </div>
+                <span class="font-mono text-xs font-bold bg-butter border border-ink px-2 py-0.5 rounded">50%</span>
+              </div>
+              <div class="w-full h-3 bg-canvas border-2 border-ink rounded-full overflow-hidden mb-2.5">
+                <div class="h-full bg-butter border-r-2 border-ink" style="width: 50%;"></div>
+              </div>
+              <p class="text-xs text-ink/75">Pemrograman mikrokontroler &amp; proyek P10</p>
+            </div>
+
+            <!-- Tool 5: GitHub (45%) -->
+            <div class="nb-card nb-card-hover rounded-2xl p-5 bg-white">
+              <div class="flex items-center justify-between gap-3 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-9 h-9 rounded-xl bg-canvas border-2 border-ink flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="6" y1="3" x2="6" y2="15"></line>
+                      <circle cx="18" cy="6" r="3"></circle>
+                      <circle cx="6" cy="18" r="3"></circle>
+                      <path d="M18 9a9 9 0 0 1-9 9"></path>
+                    </svg>
+                  </span>
+                  <span class="font-display font-bold text-base text-ink">GitHub</span>
+                </div>
+                <span class="font-mono text-xs font-bold bg-canvas border border-ink px-2 py-0.5 rounded">45%</span>
+              </div>
+              <div class="w-full h-3 bg-canvas border-2 border-ink rounded-full overflow-hidden mb-2.5">
+                <div class="h-full bg-ink/80 border-r-2 border-ink" style="width: 45%;"></div>
+              </div>
+              <p class="text-xs text-ink/75">Penyimpanan repositori &amp; versi kode</p>
+            </div>
+
+            <!-- Tool 6: Blender (40%) -->
+            <div class="nb-card nb-card-hover rounded-2xl p-5 bg-white">
+              <div class="flex items-center justify-between gap-3 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-9 h-9 rounded-xl bg-peach border-2 border-ink flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+                      <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+                      <polyline points="12 22 12 15.5"></polyline>
+                      <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
+                    </svg>
+                  </span>
+                  <span class="font-display font-bold text-base text-ink">Blender</span>
+                </div>
+                <span class="font-mono text-xs font-bold bg-peach/70 border border-ink px-2 py-0.5 rounded">40%</span>
+              </div>
+              <div class="w-full h-3 bg-canvas border-2 border-ink rounded-full overflow-hidden mb-2.5">
+                <div class="h-full bg-peach border-r-2 border-ink" style="width: 40%;"></div>
+              </div>
+              <p class="text-xs text-ink/75">Pemodelan objek 3D dasar</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right / Bottom Subsection (5 Cols): Soft Skills -->
+        <div class="lg:col-span-5">
+          <div class="flex items-center justify-between gap-2 mb-5">
+            <h3 class="font-display font-bold text-xl text-ink">
+              Soft Skills
+            </h3>
+            <span class="font-mono text-xs text-ink/65">05 Karakter Kerja</span>
+          </div>
+
+          <div class="flex flex-col gap-3.5">
+            <!-- Soft Skill 1: Komunikasi -->
+            <div class="nb-card nb-card-hover rounded-2xl p-4 bg-white flex items-start gap-3.5">
+              <span class="w-9 h-9 rounded-xl bg-butter border-2 border-ink flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </span>
+              <div>
+                <h4 class="font-display font-bold text-sm sm:text-base text-ink">Komunikasi</h4>
+                <p class="text-xs sm:text-sm text-ink/75 leading-relaxed mt-0.5">
+                  Menyampaikan ide desain maupun teknis secara jelas saat berdiskusi.
+                </p>
+              </div>
+            </div>
+
+            <!-- Soft Skill 2: Kerja Tim -->
+            <div class="nb-card nb-card-hover rounded-2xl p-4 bg-white flex items-start gap-3.5">
+              <span class="w-9 h-9 rounded-xl bg-mint border-2 border-ink flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </span>
+              <div>
+                <h4 class="font-display font-bold text-sm sm:text-base text-ink">Kerja Tim</h4>
+                <p class="text-xs sm:text-sm text-ink/75 leading-relaxed mt-0.5">
+                  Terbiasa berkolaborasi dalam tugas kelompok dan proyek bersama teman.
+                </p>
+              </div>
+            </div>
+
+            <!-- Soft Skill 3: Personal Work -->
+            <div class="nb-card nb-card-hover rounded-2xl p-4 bg-white flex items-start gap-3.5">
+              <span class="w-9 h-9 rounded-xl bg-sky border-2 border-ink flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </span>
+              <div>
+                <h4 class="font-display font-bold text-sm sm:text-base text-ink">Personal Work</h4>
+                <p class="text-xs sm:text-sm text-ink/75 leading-relaxed mt-0.5">
+                  Mandiri saat mengerjakan latihan kode, debugging, dan eksplorasi pribadi.
+                </p>
+              </div>
+            </div>
+
+            <!-- Soft Skill 4: Pembagian Waktu -->
+            <div class="nb-card nb-card-hover rounded-2xl p-4 bg-white flex items-start gap-3.5">
+              <span class="w-9 h-9 rounded-xl bg-peach border-2 border-ink flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </span>
+              <div>
+                <h4 class="font-display font-bold text-sm sm:text-base text-ink">Pembagian Waktu</h4>
+                <p class="text-xs sm:text-sm text-ink/75 leading-relaxed mt-0.5">
+                  Mengatur jadwal sekolah di SMKN 2 Banjarmasin dengan waktu belajar mandiri.
+                </p>
+              </div>
+            </div>
+
+            <!-- Soft Skill 5: Kemauan Belajar -->
+            <div class="nb-card nb-card-hover rounded-2xl p-4 bg-white flex items-start gap-3.5">
+              <span class="w-9 h-9 rounded-xl bg-lavender border-2 border-ink flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"></path>
+                </svg>
+              </span>
+              <div>
+                <h4 class="font-display font-bold text-sm sm:text-base text-ink">Kemauan Belajar</h4>
+                <p class="text-xs sm:text-sm text-ink/75 leading-relaxed mt-0.5">
+                  Terbuka pada hal baru dan terus bertumbuh dari setiap proses percobaan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ABOUT SECTION (TENTANG SAYA)
+         ====================================================================== -->
+    <section id="about" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-t-2 border-ink/15">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+        <!-- Left Column (7 Cols): Personal Story Card with Pastel Accents (#FFF3B0 & #C7F9CC) -->
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider bg-lavender border-2 border-ink px-3 py-1 rounded-lg shadow-[2px_2px_0px_#141414] mb-3">
+            <span>03 / Tentang Saya</span>
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ink tracking-tight mb-6">
+            Pelajar PPLG yang senang belajar &amp; merancang solusi digital.
+          </h2>
+
+          <div class="nb-card rounded-2xl p-6 sm:p-8 bg-white relative overflow-hidden">
+            <!-- Pastel Yellow Corner Accent -->
+            <div aria-hidden="true" class="w-16 h-16 bg-butter border-l-2 border-b-2 border-ink absolute top-0 right-0 rounded-bl-2xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-ink" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
+              </svg>
+            </div>
+
+            <p class="text-sm sm:text-base text-ink/85 leading-relaxed mb-4 pr-10">
+              Nama saya <strong class="font-bold text-ink">Rifqi Aidil Ridhani</strong>, lahir pada <strong class="font-semibold text-ink">10 Juni 2010</strong>. Saat ini saya menempuh pendidikan sebagai pelajar jurusan <strong class="font-semibold text-ink">PPLG (Pengembangan Perangkat Lunak dan Gim)</strong> di <strong class="font-semibold text-ink">SMKN 2 Banjarmasin</strong>.
+            </p>
+            <p class="text-sm sm:text-base text-ink/85 leading-relaxed mb-6">
+              Saya masih berada dalam tahap belajar dan eksplorasi di dunia pemrograman. Ketertarikan saya menggabungkan rasa ingin tahu di bidang pengembangan web, perangkat IoT sederhana seperti jam digital P10, desain antarmuka UI/UX di Figma, serta pemodelan 3D dasar di Blender.
+            </p>
+
+            <!-- Structured Quick-Fact Badges -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t-2 border-dashed border-ink/20">
+              <div class="bg-butter/60 border-2 border-ink rounded-xl px-3.5 py-2.5">
+                <span class="font-mono text-[11px] text-ink/70 block">Nama</span>
+                <span class="font-display font-bold text-sm text-ink">Rifqi Aidil Ridhani</span>
+              </div>
+              <div class="bg-mint/60 border-2 border-ink rounded-xl px-3.5 py-2.5">
+                <span class="font-mono text-[11px] text-ink/70 block">Lahir</span>
+                <span class="font-display font-bold text-sm text-ink">10 Juni 2010</span>
+              </div>
+              <div class="bg-sky/60 border-2 border-ink rounded-xl px-3.5 py-2.5">
+                <span class="font-mono text-[11px] text-ink/70 block">Sekolah</span>
+                <span class="font-display font-bold text-sm text-ink">SMKN 2 Banjarmasin</span>
+              </div>
+              <div class="bg-lavender/60 border-2 border-ink rounded-xl px-3.5 py-2.5">
+                <span class="font-mono text-[11px] text-ink/70 block">Jurusan</span>
+                <span class="font-display font-bold text-sm text-ink">PPLG</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column (5 Cols): Asymmetric Geometric Learning Path Diagram -->
+        <div class="lg:col-span-5">
+          <div class="nb-card rounded-2xl p-6 bg-mint/35 relative">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold bg-white border border-ink px-2.5 py-0.5 rounded">
+                PETA EKSPLORASI
+              </span>
+              <span class="font-mono text-xs text-ink/70">Banjarmasin, ID</span>
+            </div>
+
+            <!-- Custom Inline SVG Learning Intersection Illustration -->
+            <div class="bg-white border-2 border-ink rounded-xl p-4 mb-4">
+              <svg viewBox="0 0 320 210" class="w-full h-auto" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram Area Eksplorasi Belajar Rifqi Aidil Ridhani">
+                <!-- Connector Lines -->
+                <line x1="160" y1="105" x2="78" y2="54" stroke="#141414" stroke-width="2" stroke-dasharray="4 4" />
+                <line x1="160" y1="105" x2="242" y2="54" stroke="#141414" stroke-width="2" stroke-dasharray="4 4" />
+                <line x1="160" y1="105" x2="78" y2="156" stroke="#141414" stroke-width="2" stroke-dasharray="4 4" />
+                <line x1="160" y1="105" x2="242" y2="156" stroke="#141414" stroke-width="2" stroke-dasharray="4 4" />
+
+                <!-- Top-Left Node: Web -->
+                <rect x="24" y="28" width="108" height="46" rx="10" fill="#BDE0FE" stroke="#141414" stroke-width="2" />
+                <text x="42" y="55" fill="#141414" font-family="Space Grotesk, sans-serif" font-size="11.5" font-weight="700">Web Dasar</text>
+
+                <!-- Top-Right Node: UI/UX -->
+                <rect x="188" y="28" width="108" height="46" rx="10" fill="#E2CFEA" stroke="#141414" stroke-width="2" />
+                <text x="206" y="55" fill="#141414" font-family="Space Grotesk, sans-serif" font-size="11.5" font-weight="700">UI/UX Figma</text>
+
+                <!-- Bottom-Left Node: IoT -->
+                <rect x="24" y="136" width="108" height="46" rx="10" fill="#C7F9CC" stroke="#141414" stroke-width="2" />
+                <text x="38" y="163" fill="#141414" font-family="Space Grotesk, sans-serif" font-size="11.5" font-weight="700">IoT &amp; Arduino</text>
+
+                <!-- Bottom-Right Node: 3D Basic -->
+                <rect x="188" y="136" width="108" height="46" rx="10" fill="#FFD6BA" stroke="#141414" stroke-width="2" />
+                <text x="206" y="163" fill="#141414" font-family="Space Grotesk, sans-serif" font-size="11.5" font-weight="700">3D Blender</text>
+
+                <!-- Center Core Node -->
+                <circle cx="160" cy="105" r="34" fill="#FFF3B0" stroke="#141414" stroke-width="2.2" />
+                <text x="142" y="102" fill="#141414" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700">Rifqi</text>
+                <text x="139" y="116" fill="#141414" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">Belajar</text>
+              </svg>
+            </div>
+
+            <p class="font-mono text-xs text-ink/80 leading-relaxed">
+              &ldquo;Terus mencoba dari hal mendasar, mencatat setiap proses, dan membangun karya bertahap.&rdquo;
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CAPABILITIES SECTION (KEMAMPUAN & FOKUS BELAJAR)
+         ====================================================================== -->
+    <section id="capabilities" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-t-2 border-ink/15">
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider bg-peach border-2 border-ink px-3 py-1 rounded-lg shadow-[2px_2px_0px_#141414] mb-3">
+          <span>04 / Kemampuan &amp; Fokus Belajar</span>
+        </div>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ink tracking-tight">
+          Bidang yang sedang saya tekuni.
+        </h2>
+        <p class="text-sm sm:text-base text-ink/75 mt-2 max-w-2xl">
+          Setiap bidang berikut merupakan area praktik aktif saya di sekolah maupun proyek mandiri pada tingkat pemula hingga menengah.
+        </p>
+      </div>
+
+      <!-- 4 Capabilities Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Capability 1: Web Development (Pemula – Menengah) -->
+        <div class="nb-card nb-card-hover rounded-2xl p-6 bg-white flex flex-col justify-between">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-xl bg-mint border-2 border-ink flex items-center justify-center font-mono font-bold text-xs shadow-[2px_2px_0px_#141414]">
+                  01
+                </span>
+                <h3 class="font-display font-bold text-xl text-ink">
+                  Web Development
+                </h3>
+              </div>
+              <span class="font-mono text-xs font-bold bg-mint border border-ink px-2.5 py-0.5 rounded-full">
+                Pemula &ndash; Menengah
+              </span>
+            </div>
+            <p class="text-sm text-ink/80 leading-relaxed mb-5">
+              Membangun struktur halaman web responsif menggunakan HTML, CSS, dan JavaScript dasar, termasuk antarmuka web sederhana untuk kontrol perangkat.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">HTML5</span>
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">CSS3 / Tailwind</span>
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">JavaScript Dasar</span>
+          </div>
+        </div>
+
+        <!-- Capability 2: UI/UX Design (Pemula – Menengah) -->
+        <div class="nb-card nb-card-hover rounded-2xl p-6 bg-white flex flex-col justify-between">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-xl bg-lavender border-2 border-ink flex items-center justify-center font-mono font-bold text-xs shadow-[2px_2px_0px_#141414]">
+                  02
+                </span>
+                <h3 class="font-display font-bold text-xl text-ink">
+                  UI/UX Design
+                </h3>
+              </div>
+              <span class="font-mono text-xs font-bold bg-lavender border border-ink px-2.5 py-0.5 rounded-full">
+                Pemula &ndash; Menengah
+              </span>
+            </div>
+            <p class="text-sm text-ink/80 leading-relaxed mb-5">
+              Merancang wireframe, alur tampilan, dan desain antarmuka bersih yang mudah dipahami pengguna menggunakan Figma.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">Wireframing</span>
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">Layouting</span>
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">Figma</span>
+          </div>
+        </div>
+
+        <!-- Capability 3: Programming (Pemula) -->
+        <div class="nb-card nb-card-hover rounded-2xl p-6 bg-white flex flex-col justify-between">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-xl bg-butter border-2 border-ink flex items-center justify-center font-mono font-bold text-xs shadow-[2px_2px_0px_#141414]">
+                  03
+                </span>
+                <h3 class="font-display font-bold text-xl text-ink">
+                  Programming
+                </h3>
+              </div>
+              <span class="font-mono text-xs font-bold bg-butter border border-ink px-2.5 py-0.5 rounded-full">
+                Pemula
+              </span>
+            </div>
+            <p class="text-sm text-ink/80 leading-relaxed mb-5">
+              Mempelajari logika pemrograman dasar, struktur kode, serta pemrograman mikrokontroler untuk proyek IoT sederhana.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">Logika Dasar</span>
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">Arduino / C++</span>
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">IoT P10</span>
+          </div>
+        </div>
+
+        <!-- Capability 4: Creative Design (Pemula – Menengah) -->
+        <div class="nb-card nb-card-hover rounded-2xl p-6 bg-white flex flex-col justify-between">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-xl bg-peach border-2 border-ink flex items-center justify-center font-mono font-bold text-xs shadow-[2px_2px_0px_#141414]">
+                  04
+                </span>
+                <h3 class="font-display font-bold text-xl text-ink">
+                  Creative Design
+                </h3>
+              </div>
+              <span class="font-mono text-xs font-bold bg-peach border border-ink px-2.5 py-0.5 rounded-full">
+                Pemula &ndash; Menengah
+              </span>
+            </div>
+            <p class="text-sm text-ink/80 leading-relaxed mb-5">
+              Membuat desain grafis pendukung, presentasi visual di Canva, serta eksplorasi bentuk 3D dasar di Blender.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">Canva</span>
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">3D Basic Blender</span>
+            <span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">Visual Layout</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CONTACT & COLLABORATION SECTION (KONTAK)
+         ====================================================================== -->
+    <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-t-2 border-ink/15">
+      <div class="relative nb-card rounded-3xl p-7 sm:p-12 bg-mint/45 overflow-hidden">
+
+        <!-- Decorative Geometric SVG & Pastel Accents inside Contact Card -->
+        <div aria-hidden="true" class="hidden sm:block absolute -right-8 -top-8 w-44 h-44 rounded-full bg-butter border-2 border-ink"></div>
+        <div aria-hidden="true" class="hidden sm:block absolute right-24 top-6 w-14 h-14 rounded-2xl bg-lavender border-2 border-ink rotate-12"></div>
+        <svg aria-hidden="true" class="hidden sm:block w-8 h-8 absolute right-10 top-32 animate-float-slow" viewBox="0 0 32 32" fill="none">
+          <path d="M16 1L19.5 12.5L31 16L19.5 19.5L16 31L12.5 19.5L1 16L12.5 12.5L16 1Z" fill="#FFFFFF" stroke="#141414" stroke-width="2" />
+        </svg>
+
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider bg-white border-2 border-ink px-3 py-1 rounded-lg shadow-[2px_2px_0px_#141414] mb-4">
+            <span>05 / Kontak &amp; Kolaborasi</span>
+          </div>
+
+          <h2 class="font-display font-bold text-3xl sm:text-5xl text-ink tracking-tight leading-[1.1] mb-4">
+            Tertarik Belajar atau Berkolaborasi Bersama?
+          </h2>
+
+          <p class="text-base sm:text-lg text-ink/85 leading-relaxed mb-8">
+            Terbuka untuk diskusi proyek belajar, kolaborasi desain UI/UX, eksperimen web, maupun berbagi pengalaman sesama pelajar PPLG dan developer.
+          </p>
+
+          <!-- Interactive Email Collaboration Box -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8">
+            <div class="flex-1 bg-white border-2 border-ink rounded-xl px-4 py-3.5 flex items-center justify-between gap-3 shadow-[3px_3px_0px_#141414]">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <svg class="w-4 h-4 text-ink shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="2" y="4" width="20" height="16" rx="3"></rect>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span id="email-address-text" class="font-mono text-sm sm:text-base font-bold text-ink truncate">
+                  aidlrdhni06@gmail.com
+                </span>
+              </div>
+
+              <button
+                id="copy-email-btn"
+                type="button"
+                onclick="copyEmailToClipboard()"
+                class="nb-btn-sm bg-butter hover:bg-mint text-ink font-display font-bold text-xs px-3 py-1.5 rounded-lg shrink-0 inline-flex items-center gap-1.5 cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span id="copy-btn-label">Salin Email</span>
+              </button>
+            </div>
+
+            <a
+              href="mailto:aidlrdhni06@gmail.com"
+              class="nb-btn bg-ink text-white hover:bg-butter hover:text-ink font-display font-bold text-sm px-6 py-3.5 rounded-xl inline-flex items-center justify-center gap-2 shrink-0"
+            >
+              <span>Kirim Email</span>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Direct Social Links: Instagram & GitHub -->
+          <div class="flex flex-wrap items-center gap-3">
+            <a
+              href="https://instagram.com/aidlrdhni"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="nb-btn-sm bg-white hover:bg-peach px-4 py-2.5 rounded-full font-display font-bold text-xs sm:text-sm inline-flex items-center gap-2"
+            >
+              <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              <span>Instagram: @aidlrdhni</span>
+            </a>
+
+            <a
+              href="https://github.com/aidlrdhni"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="nb-btn-sm bg-white hover:bg-sky px-4 py-2.5 rounded-full font-display font-bold text-xs sm:text-sm inline-flex items-center gap-2"
+            >
+              <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              <span>GitHub: github.com/aidlrdhni</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       MINIMAL FOOTER
+       ======================================================================== -->
+  <footer class="border-t-2 border-ink bg-canvas">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <span class="w-3 h-3 bg-mint border-2 border-ink inline-block rounded-sm"></span>
+        <p class="font-mono text-xs text-ink/80">
+          &copy; 2026 Rifqi Aidil Ridhani &mdash; SMKN 2 Banjarmasin (PPLG)
+        </p>
+      </div>
+
+      <a
+        href="#top"
+        class="nb-btn-sm bg-white hover:bg-butter font-mono text-xs font-bold px-3.5 py-1.5 rounded-lg inline-flex items-center gap-1.5"
+      >
+        <span>Kembali ke atas</span>
+        <span>&uarr;</span>
+      </a>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       PROJECT CASE-STUDY MODAL (DETAIL PROYEK)
+       ======================================================================== -->
+  <div
+    id="project-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-ink/45 backdrop-blur-[2px]"
+  >
+    <div class="nb-card bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative">
+      <!-- Modal Top Bar -->
+      <div class="flex items-center justify-between gap-4 pb-4 mb-5 border-b-2 border-ink">
+        <div class="flex items-center gap-2.5">
+          <span id="modal-category-badge" class="font-mono text-xs font-bold bg-mint border border-ink px-2.5 py-0.5 rounded-md">
+            IoT &amp; Web
+          </span>
+          <span id="modal-subtitle" class="font-mono text-xs text-ink/65">Proyek Eksplorasi</span>
+        </div>
+
+        <button
+          id="close-modal-btn"
+          type="button"
+          onclick="closeProjectModal()"
+          aria-label="Tutup Detail Proyek"
+          class="nb-btn-sm bg-peach hover:bg-butter p-2 rounded-lg text-ink cursor-pointer"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="6" y1="18" x2="18" y2="6"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Content -->
+      <h3 id="modal-title" class="font-display font-bold text-2xl sm:text-3xl text-ink mb-3">
+        Judul Proyek
+      </h3>
+
+      <p id="modal-summary" class="text-sm sm:text-base text-ink/85 leading-relaxed mb-6">
+        Ringkasan proyek.
+      </p>
+
+      <!-- Learning & Technical Notes Box -->
+      <div class="bg-canvas border-2 border-ink rounded-xl p-5 mb-6">
+        <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-ink mb-3">
+          Poin Pembelajaran &amp; Implementasi
+        </h4>
+        <ul id="modal-highlights" class="space-y-2.5 text-sm text-ink/85">
+          <!-- Populated dynamically via JS -->
+        </ul>
+      </div>
+
+      <!-- Modal Tech Stack & Action -->
+      <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+        <div id="modal-tags" class="flex flex-wrap gap-2">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <button
+          type="button"
+          onclick="closeProjectModal()"
+          class="nb-btn-sm bg-mint hover:bg-butter font-display font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer"
+        >
+          Tutup Detail
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       INTERACTIVE JAVASCRIPT (Filter Proyek, Modal Detail, Salin Email, Menu Mobile)
+       ======================================================================== -->
+  <script>
+    const PROJECT_DATA = [
+      {
+        title: 'Jam Digital IoT Panel LED P10',
+        category: 'IoT & Web',
+        badgeColor: 'bg-mint',
+        subtitle: 'Proyek Mikrokontroler & LED Matrix',
+        summary:
+          'Proyek merakit dan memprogram jam digital menggunakan mikrokontroler yang terhubung ke panel LED dot-matrix P10. Fokus utama pada tampilan waktu yang jelas, pembacaan pin komunikasi HUB12 yang rapi, serta sinkronisasi waktu secara stabil.',
+        highlights: [
+          'Menghubungkan jalur pin komunikasi panel LED P10 ke mikrokontroler menggunakan Arduino IDE.',
+          'Mengatur tampilan angka dot-matrix agar kontras, mudah dibaca dari jarak jauh, dan berjalan stabil.',
+          'Mempelajari dasar koneksi jaringan dan sinkronisasi waktu otomatis pada perangkat IoT sederhana.',
+        ],
+        tags: ['Arduino IDE', 'Panel P10', 'IoT', 'Mikrokontroler'],
+      },
+      {
+        title: 'Website Pengaturan Jam IoT',
+        category: 'IoT & Web',
+        badgeColor: 'bg-sky',
+        subtitle: 'Antarmuka Kontrol Berbasis Browser',
+        summary:
+          'Halaman antarmuka web responsif yang dibuat sebagai pasangan dari jam digital P10. Melalui browser di ponsel maupun laptop, pengguna dapat menyesuaikan waktu, mengatur tingkat kecerahan LED, dan mengganti mode tampilan dengan praktis.',
+        highlights: [
+          'Merancang tampilan panel kontrol yang sederhana dan mudah digunakan di layar mobile maupun desktop.',
+          'Menyediakan fitur sinkronisasi waktu instan, pengaturan slider kecerahan, dan pemilihan mode tampilan.',
+          'Melatih integrasi antara kode antarmuka HTML/CSS/JavaScript dengan komunikasi perangkat IoT.',
+        ],
+        tags: ['HTML/CSS', 'JavaScript', 'Web Control', 'Responsive UI'],
+      },
+      {
+        title: 'Eksplorasi 3D Model Basic di Blender',
+        category: '3D Modeling',
+        badgeColor: 'bg-peach',
+        subtitle: 'Latihan Pemodelan Objek & Pencahayaan',
+        summary:
+          'Kumpulan latihan dasar dalam memahami ruang kerja 3D di Blender, mulai dari membentuk objek geometris sederhana, mengatur proporsi mesh, menerapkan material dasar, hingga menata pencahayaan agar objek terlihat seimbang.',
+        highlights: [
+          'Mempelajari navigasi viewport 3D, sumbu koordinat X/Y/Z, serta operasi dasar edit mesh.',
+          'Bereksperimen dengan bentuk geometris rendah poligon (low-poly) dan komposisi objek.',
+          'Melatih pengaturan sumber cahaya (area light) dan warna material sederhana untuk hasil render yang rapi.',
+        ],
+        tags: ['Blender', '3D Basic', 'Modeling', 'Lighting Dasar'],
+      },
+      {
+        title: 'Eksplorasi Desain UI/UX di Figma',
+        category: 'UI/UX Design',
+        badgeColor: 'bg-lavender',
+        subtitle: 'Wireframe, Komponen & Tata Letak Antarmuka',
+        summary:
+          'Berbagai latihan eksplorasi desain tampilan aplikasi mobile dan website di Figma. Berfokus pada penyusunan kerangka wireframe terlebih dahulu sebelum masuk ke pemilihan tipografi, palet warna, dan komponen UI yang konsisten.',
+        highlights: [
+          'Menyusun wireframe awal untuk memetakan struktur halaman dan alur navigasi pengguna.',
+          'Menerapkan prinsip tata letak bersih, hierarki visual, dan jarak antar elemen yang teratur.',
+          'Membuat komponen tombol, kartu informasi, dan variasi warna dasar yang mudah digunakan kembali.',
+        ],
+        tags: ['Figma', 'Wireframe', 'UI/UX', 'Design Exploration'],
+      },
+    ];
+
+    // ------------------------------------------------------------------------
+    // 1. Mobile Navigation Drawer Toggle
+    // ------------------------------------------------------------------------
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIconOpen = document.getElementById('menu-icon-open');
+    const menuIconClose = document.getElementById('menu-icon-close');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        menuIconOpen.classList.toggle('hidden');
+        menuIconClose.classList.toggle('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', String(isHidden));
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuIconOpen.classList.remove('hidden');
+          menuIconClose.classList.add('hidden');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // ------------------------------------------------------------------------
+    // 2. Project Category Filtering
+    // ------------------------------------------------------------------------
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selectedCategory = btn.getAttribute('data-filter');
+
+        filterButtons.forEach((b) => {
+          b.classList.remove('bg-ink', 'text-white');
+          b.classList.add('bg-white', 'text-ink');
+        });
+        btn.classList.remove('bg-white', 'text-ink');
+        btn.classList.add('bg-ink', 'text-white');
+
+        projectCards.forEach((card) => {
+          const cardCategory = card.getAttribute('data-category');
+          if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ------------------------------------------------------------------------
+    // 3. Project Detail Modal Logic
+    // ------------------------------------------------------------------------
+    const modal = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCategoryBadge = document.getElementById('modal-category-badge');
+    const modalSubtitle = document.getElementById('modal-subtitle');
+    const modalSummary = document.getElementById('modal-summary');
+    const modalHighlights = document.getElementById('modal-highlights');
+    const modalTags = document.getElementById('modal-tags');
+
+    function openProjectModal(index) {
+      const project = PROJECT_DATA[index];
+      if (!project || !modal) return;
+
+      modalTitle.textContent = project.title;
+      modalCategoryBadge.textContent = project.category;
+      modalCategoryBadge.className = `font-mono text-xs font-bold ${project.badgeColor} border border-ink px-2.5 py-0.5 rounded-md`;
+      modalSubtitle.textContent = project.subtitle;
+      modalSummary.textContent = project.summary;
+
+      modalHighlights.innerHTML = project.highlights
+        .map(
+          (item) => `
+            <li class="flex items-start gap-2.5">
+              <span class="w-4 h-4 rounded bg-mint border border-ink flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold">&check;</span>
+              <span>${item}</span>
+            </li>
+          `
+        )
+        .join('');
+
+      modalTags.innerHTML = project.tags
+        .map(
+          (tag) =>
+            `<span class="font-mono text-xs bg-canvas border border-ink px-2.5 py-1 rounded-md">${tag}</span>`
+        )
+        .join('');
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeProjectModal();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        closeProjectModal();
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // 4. One-Click Email Copy + Toast Notification
+    // ------------------------------------------------------------------------
+    let toastTimeout = null;
+
+    function showToast(title, subtitle) {
+      const toast = document.getElementById('toast-notification');
+      const toastTitle = document.getElementById('toast-title');
+      const toastSubtitle = document.getElementById('toast-subtitle');
+      if (!toast) return;
+
+      toastTitle.textContent = title;
+      toastSubtitle.textContent = subtitle;
+
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-4');
+      }, 3200);
+    }
+
+    function copyEmailToClipboard() {
+      const emailText = document.getElementById('email-address-text').textContent.trim();
+      const copyBtnLabel = document.getElementById('copy-btn-label');
+
+      const tempInput = document.createElement('textarea');
+      tempInput.value = emailText;
+      tempInput.setAttribute('readonly', '');
+      tempInput.style.position = 'absolute';
+      tempInput.style.left = '-9999px';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+
+      try {
+        document.execCommand('copy');
+        if (copyBtnLabel) {
+          copyBtnLabel.textContent = 'Tersalin!';
+          setTimeout(() => {
+            copyBtnLabel.textContent = 'Salin Email';
+          }, 2200);
+        }
+        showToast(`Email ${emailText} berhasil disalin!`, 'Siap untuk kolaborasi & diskusi');
+      } catch (err) {
+        showToast(`Email: ${emailText}`, 'Silakan salin alamat email di atas');
+      } finally {
+        document.body.removeChild(tempInput);
+      }
+    }
+  </script>
+</body>
+</html>
